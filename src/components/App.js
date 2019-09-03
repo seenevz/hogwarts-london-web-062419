@@ -1,16 +1,35 @@
-import React, { Component } from 'react';
-import '../App.css';
-import Nav from './Nav'
-import hogs from '../porkers_data';
+import React, { Component } from "react";
+import "../App.css";
+import Nav from "./Nav";
+import PigsContainer from "./PigsContainer";
 
 class App extends Component {
+  state = {
+    toggleGreased: false,
+    sortType: ""
+  };
+
+  handleToggleState = () => {
+    this.setState({ toggleGreased: !this.state.toggleGreased });
+  };
+
+  handleSortState = eventValue => {
+    this.setState({ sortType: eventValue });
+  };
+
   render() {
     return (
       <div className="App">
-          < Nav />
-
+        <Nav
+          handleClick={this.handleToggleState}
+          handleDropdown={this.handleSortState}
+        />
+        <PigsContainer
+          toggle={this.state.toggleGreased}
+          sortType={this.state.sortType}
+        />
       </div>
-    )
+    );
   }
 }
 
